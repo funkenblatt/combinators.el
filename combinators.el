@@ -1,16 +1,21 @@
 (require 'cl)
 
 (defun cur (f &rest args)
+  "Specialize a function on its first few arguments."
   (lambda (&rest more-args)
     (apply f (append args more-args))))
 
 (defun comp (&rest funcs)
+  "Compose functions together.  Function on the left
+gets called last."
   (lambda (arg)
     (reduce (lambda (a fun) (funcall fun a))
             (reverse funcs)
             :initial-value arg)))
 
 (defmacro cut (&rest stuff)
+  "See SRFI-26.
+But basically, (cut foo <> bar baz <>) => (lambda (arg1 arg2) (foo arg1 bar baz arg2))."
   (let ((args (mapcar
                (lambda (x) (gensym))
                (remove-if-not (cur 'eq '<>) stuff))))
@@ -32,9 +37,13 @@ given FNS return non-nil when applied to the argument."
     (every (cut funcall <> x) fns)))
 
 (defun juxt (&rest funcs)
+  "Given a bunch of functions, return a new function that juxtaposes
+the results of calling said functions on an argument."
   (lambda (&rest args) (mapcar (cut apply <> args) funcs)))
 
 (defun juxtcons (a b)
+  "Returns a function that, given functions A and B,
+returns (cons (funcall a arg) (funcall b arg))."
   (lambda (&rest args) 
     (cons (apply a args) (apply b args))))
 
