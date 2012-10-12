@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (require 'cl)
 
 (defun cur (f &rest args)
