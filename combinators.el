@@ -7,10 +7,11 @@
 
 (require 'cl)
 
-(defun cur (f &rest args)
-  "Specialize a function on its first few arguments."
-  (lambda (&rest more-args)
-    (apply f (append args more-args))))
+(eval-and-compile
+  (defun cur (f &rest args)
+    "Specialize a function on its first few arguments."
+    (lambda (&rest more-args)
+      (apply f (append args more-args)))))
 
 (defun comp (&rest funcs)
   "Compose functions together.  Function on the left
