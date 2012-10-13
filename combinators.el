@@ -1,4 +1,10 @@
-;; -*- lexical-binding: t; -*-
+;;; combinators.el --- -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2012 Jason Feng
+;; 
+;; URL: http://github.com/funkenblatt/combinators.el
+;; Version: 0.0.1
+
 (require 'cl)
 
 (defun cur (f &rest args)
@@ -59,3 +65,5 @@ PRED on its argument is non-nil, else returns nil"
   (lambda (&rest args) c))
 
 (provide 'combinators)
+
+;;; combinators.el ends here
