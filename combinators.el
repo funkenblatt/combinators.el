@@ -32,7 +32,7 @@ any of the given FNs applied to the argument is non-nil."
     (some (cut funcall <> x) fns)))
 
 (defun andfn (&rest fns)
-  "Returns a function whose result is non-nil if all of the
+  "Returns a function whose result is T if all of the
 given FNS return non-nil when applied to the argument."
   (lambda (x)
     (every (cut funcall <> x) fns)))
@@ -57,3 +57,5 @@ PRED on its argument is non-nil, else returns nil"
 (defun const (c)
   "Returns a function that returns C regardless of arguments."
   (lambda (&rest args) c))
+
+(provide 'combinators)
