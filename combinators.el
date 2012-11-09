@@ -64,6 +64,10 @@ PRED on its argument is non-nil, else returns nil"
   "Returns a function that returns C regardless of arguments."
   (lambda (&rest args) c))
 
+(defun hashfn (h)
+  "Returns a function that retrieves from hash table H."
+  (cut gethash <> h))
+
 (provide 'combinators)
 
 ;;; combinators.el ends here
