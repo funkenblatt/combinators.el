@@ -38,11 +38,23 @@ any of the given FNs applied to the argument is non-nil."
   (lambda (x)
     (some (cut funcall <> x) fns)))
 
+(defun orfn2 (&rest fns)
+  "Returns a function whose result is non-nil if the result of
+any of the given FNs applied to the arguments is non-nil."
+  (lambda (&rest args)
+    (some (cut apply <> args) fns)))
+
 (defun andfn (&rest fns)
   "Returns a function whose result is T if all of the
 given FNS return non-nil when applied to the argument."
   (lambda (x)
     (every (cut funcall <> x) fns)))
+
+(defun andfn2 (&rest fns)
+  "Returns a function whose result is T if all of the
+given FNS return non-nil when applied the arguments."
+  (lambda (&rest args)
+    (every (cut apply <> args) fns)))
 
 (defun juxt (&rest funcs)
   "Given a bunch of functions, return a new function that juxtaposes
